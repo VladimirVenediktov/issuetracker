@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Authentication</title>
+		<style type="text/css">
+			
+			input:invalid {
+   				border: 2px solid;
+   				border-color: #ff0000;
+   			}
+   			
+   			input:valid {
+   				border: 2px solid;
+    			border-color: #3399ff;
+   			}
+			
+			TABLE {
+			    text-align: center;
+			    width: 25%; 
+			    height: 30%;
+			    background: #99ff99;
+			    border: 2px solid #000;
+			    border-collapse: collapse;
+			    margin: auto;
+			}
+		   	TD, TH {
+		    	padding: 5px;
+		    	
+		   	}
+		</style>
+		<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+		<script>
+			function enter(){
+			
+				var login = $('#login').val();
+				var password = $('#password').val();
+				var dataStr = {log: login, pass: password};
+			
+				$.ajax(
+					{
+					type: "GET",
+					url: "/auth",
+					data: dataStr,
+					success:function(answer){
+						$("div").html(answer);
+						}
+					}
+				);
+			}
+		</script>
+	</head>
+	<body>
+		<table>
+			<caption style="font-size:25px">Вход в систему Issue Tracker</caption>
+			<tr>
+				<td>
+					Логин <input type="text" id="login" required>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Пароль <input type="password" id="password" required>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button onclick="enter()">Войти</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div></div>
+				</td>
+			</tr>
+		</table>			
+	</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>New Issue</title>
+		<style type="text/css">
+			input:invalid {
+   				border: 2px solid;
+   				border-color: #ff0000;
+   			}
+ 
+   			input:valid {
+   				border: 2px solid;
+    			border-color: #3399ff;
+   			}
+			
+			TABLE {
+			    text-align: center;
+			    width: 25%; 
+			    height: 30%;
+			    background: #99ff99;
+			    border: 2px solid #000;
+			    border-collapse: collapse;
+			    margin: auto;
+			}
+		   	TD, TH {
+		    	padding: 5px;
+		    	
+		   	}
+		</style>
+		<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+		<script>
+			function createIssue(){
+				var name = $('#name').val();
+				var author = $('#author').val();
+				var description = $('#description').val();
+				var dataStr = {name:name, author:author, description:description};
+				
+				$.ajax(
+						{
+						type: "POST",
+						url: "/issueTracker/createIssue",
+						data: dataStr,
+						success:function(answer){
+							$("div").html(answer);
+							}
+						}
+				);
+			}
+		</script>
+	</head>
+	<body>
+		<table>
+			<caption style="font-size:25px">Issue Tracker: Новая задача</caption>
+			<tr>
+				<td>
+					Название: <input type="text" id="name">
+				</td>
+			</tr>
+			<tr>
+				<td>	
+					Автор: <input type="text" id="author">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Описание:<br>
+					<textarea id="description" rows="5" cols="50"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button onclick="createIssue()" style="margin-right:10px">Добавить задачу</button>
+					<button onclick="javascript:window.location='/issueTracker/issues'">Отмена</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href = '/issueTracker/issues'>Перейти к списку задач</a>
+				</td>
+			</tr>
+		</table>			
+	</body>
+</html>

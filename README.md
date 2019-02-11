@@ -19,4 +19,9 @@ Run the following command:
 mvn exec:java
 ```
 
-Open your web browser and visit http://localhost. If everything is fine, you should see `Hello, world`.
+Open your web browser and visit <b>http://localhost/auth.html</b>. If everything is fine, you should see <b>'Вход в систему Issue Tracker'</b>
+
+<b>Login:</b> user </br>
+
+
+<b>Password:</b> user
