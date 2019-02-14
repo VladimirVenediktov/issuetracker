@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title>New Issue</title>
 		<style type="text/css">
+			
 			input:invalid {
    				border: 2px solid;
    				border-color: #ff0000;
@@ -15,6 +16,7 @@
    			}
 			
 			TABLE {
+			    font-family: Verdana;
 			    text-align: center;
 			    width: 25%; 
 			    height: 30%;
@@ -30,7 +32,28 @@
 		</style>
 		<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 		<script>
-			function createIssue(){
+			function formValid(){
+			
+				var name = $('#name').val();
+				var author = $('#author').val();
+				var description = $('#description').val();
+				var notFilled = "Вы не заполнили обязательное поле НАЗВАНИЕ!";
+				var notMatched = "Неверный формат введенных данных!\nМожно использовать следующие символы: буквы, цифры, точка, запятая, ?, !, №, скобки (), пробел, нижнее подчеркивание (_), дефис";
+				var pattern = /^[A-ZА-яa-zа-я0-9№\(\),?! _\.-]*$/;
+				
+				if (name == "") {
+					alert(notFilled);
+					return;
+				}
+				if (!(pattern.test(name)&&pattern.test(author)&&pattern.test(description))) {
+					alert(notMatched);
+					return;
+				}
+				createIssue();
+			}
+		</script>
+		<script>
+			function createIssue() {
 				var name = $('#name').val();
 				var author = $('#author').val();
 				var description = $('#description').val();
@@ -53,14 +76,10 @@
 		<table>
 			<caption style="font-size:25px">Issue Tracker: Новая задача</caption>
 			<tr>
-				<td>
-					Название: <input type="text" id="name">
-				</td>
+				<td>Название: <input type="text" id="name" required></td>	
 			</tr>
 			<tr>
-				<td>	
-					Автор: <input type="text" id="author">
-				</td>
+				<td>Автор: <input type="text" id="author"></td>		
 			</tr>
 			<tr>
 				<td>
@@ -70,7 +89,7 @@
 			</tr>
 			<tr>
 				<td>
-					<button onclick="createIssue()" style="margin-right:10px">Добавить задачу</button>
+					<button onclick="formValid()" style="margin-right:10px">Добавить задачу</button>
 					<button onclick="javascript:window.location='/issueTracker/issues'">Отмена</button>
 				</td>
 			</tr>

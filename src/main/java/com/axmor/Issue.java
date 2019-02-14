@@ -1,4 +1,7 @@
 package com.axmor;
+
+import java.util.ArrayList;
+
 /** 
  * Класс объекта Issue (задача).
  * 
@@ -6,6 +9,7 @@ package com.axmor;
  * @version 1.0
 */
 public class Issue {
+	
 	/**
 	 * ID задачи
 	 */
@@ -25,7 +29,7 @@ public class Issue {
 	/**
 	 * статус задачи
 	 */
-	private String status;
+	private IssueStatus status;
 	/**
 	 * дата создания задачи
 	 */
@@ -33,19 +37,26 @@ public class Issue {
 	/**
 	 * комментарии к задаче
 	 */
-	private String comment;
+	private ArrayList<Comment> comments;
 	
 	/** 
      * Конструктор - создание нового объекта Issue (задача)
      */
-	public Issue(int  id, String name, String author, String description, String status, String startDate, String comment) {
+	public Issue(int  id, String name, String author, String description, IssueStatus status, String startDate, ArrayList<Comment> comments) {
 		this.id = id;
 		this.name = name;
 		this.author = author;
 		this.description = description;
 		this.status = status;
 		this.startDate = startDate;
-		this.comment = comment;
+		this.comments = comments;
+	}
+	
+	enum IssueStatus{
+		
+		Новая,
+		Выполняется,
+		Выполнена
 	}
 	
 	//геттеры
@@ -65,7 +76,7 @@ public class Issue {
 		return description;
 	}
 	
-	public String getStatus() {
+	public IssueStatus getStatus() {
 		return status;
 	}
 	
@@ -73,12 +84,12 @@ public class Issue {
 		return startDate;
 	}
 	
-	public String getComment() {
-		return comment;
+	public ArrayList<Comment> getComments() {
+		return comments;
 	}
 	
 	@Override
 	public String toString() {
-		return name+" - "+status;
+		return "Issue id:"+id+" {name: "+name+", auhor: "+author+", description: "+description+", status: "+status+", startDate: "+startDate+"}";
 	}
 }

@@ -4,18 +4,9 @@
 		<meta charset="UTF-8">
 		<title>Authentication</title>
 		<style type="text/css">
-			
-			input:invalid {
-   				border: 2px solid;
-   				border-color: #ff0000;
-   			}
-   			
-   			input:valid {
-   				border: 2px solid;
-    			border-color: #3399ff;
-   			}
-			
+
 			TABLE {
+			    font-family: Verdana;
 			    text-align: center;
 			    width: 25%; 
 			    height: 30%;
@@ -31,8 +22,29 @@
 		</style>
 		<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 		<script>
-			function enter(){
+			function formValid(){
 			
+				var login = $('#login').val();
+				var password = $('#password').val();
+				var notFilled = "Вы не заполнили обязательные поля!";
+				var notMatched = "Неверный формат введенных данных!\nМожно использовать следующие символы: A-Z, a-z, _ , - (от 4 до 16 символов)";
+				var pattern = /^[A-Za-z0-9_-]{4,16}$/;
+				
+				if ((login == "")||(password=="")) {
+					alert(notFilled);
+					return;
+				}
+				if (!(pattern.test(login)&&pattern.test(password))) {
+					alert(notMatched);
+					return;
+				}
+				send();
+			}
+		</script>
+		
+		<script>
+			function send(){
+
 				var login = $('#login').val();
 				var password = $('#password').val();
 				var dataStr = {log: login, pass: password};
@@ -55,17 +67,15 @@
 			<caption style="font-size:25px">Вход в систему Issue Tracker</caption>
 			<tr>
 				<td>
-					Логин <input type="text" id="login" required>
+					<form>
+						Логин <input type="text" id="login"><br><br>
+						Пароль <input type="password" id="password">
+					</form>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					Пароль <input type="password" id="password" required>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<button onclick="enter()">Войти</button>
+					<button onclick="formValid()">Войти</button>
 				</td>
 			</tr>
 			<tr>
@@ -73,6 +83,6 @@
 					<div></div>
 				</td>
 			</tr>
-		</table>			
+		</table>		
 	</body>
 </html>
