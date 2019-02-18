@@ -1,4 +1,4 @@
-package com.axmor;
+package com.axmor.comment;
 
 /** 
  * Класс объекта Comment (комментарий).

@@ -1,4 +1,4 @@
-package com.axmor;
+package com.axmor.comment;
 
 import java.util.ArrayList;
 

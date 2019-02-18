@@ -1,4 +1,4 @@
-package com.axmor;
+package com.axmor.issue;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,7 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.axmor.Issue.IssueStatus;
+import com.axmor.comment.CommentDaoImpl;
+import com.axmor.connection.ConnectionPool;
+import com.axmor.issue.Issue.IssueStatus;
 
 public class IssueDaoImpl implements IssueDao {
 

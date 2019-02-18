@@ -1,4 +1,4 @@
-package com.axmor;
+package com.axmor.user;
 
 public interface UserDao {
 	

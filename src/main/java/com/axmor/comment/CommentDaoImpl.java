@@ -1,4 +1,4 @@
-package com.axmor;
+package com.axmor.comment;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.axmor.Comment.IssueStatus;
+import com.axmor.comment.Comment.IssueStatus;
+import com.axmor.connection.ConnectionPool;
+
 
 public class CommentDaoImpl implements CommentDao {
 

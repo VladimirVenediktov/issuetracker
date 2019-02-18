@@ -1,4 +1,4 @@
-package com.axmor;
+package com.axmor.connection;
 
 import java.io.FileInputStream;
 import java.io.IOException;

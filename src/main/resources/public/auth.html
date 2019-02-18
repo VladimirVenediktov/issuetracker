@@ -49,16 +49,19 @@
 				var password = $('#password').val();
 				var dataStr = {log: login, pass: password};
 			
-				$.ajax(
-					{
+				$.ajax({
 					type: "GET",
 					url: "/auth",
 					data: dataStr,
 					success:function(answer){
-						$("div").html(answer);
+						if (answer == "Вход выполнен"){
+							window.location.href = "/issueTracker/issues";//переход к списку задач
+						}
+						else{
+							$("div").html(answer);
 						}
 					}
-				);
+				});
 			}
 		</script>
 	</head>

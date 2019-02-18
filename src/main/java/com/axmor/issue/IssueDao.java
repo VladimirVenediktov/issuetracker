@@ -1,4 +1,4 @@
-package com.axmor;
+package com.axmor.issue;
 
 import java.util.ArrayList;
 

@@ -11,13 +11,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.axmor.Issue.IssueStatus;
+import com.axmor.comment.CommentDaoImpl;
+import com.axmor.issue.Issue;
+import com.axmor.issue.IssueDaoImpl;
+import com.axmor.issue.Issue.IssueStatus;
+import com.axmor.user.UserDaoImpl;
 
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
 import freemarker.template.MalformedTemplateNameException;
 import freemarker.template.Template;
 import freemarker.template.TemplateNotFoundException;
+
 /** 
  * Класс Main обеспечивает запуск и работу веб-приложения Issue Tracker
  * с применением микрофреймворка Spark (http://sparkjava.com),
@@ -64,7 +69,8 @@ public class Main {
 			String userName;
 			String answer;
 			String NON_AUTHENTICATED = "Введен неверный логин или пароль";
-			String AUTHENTICATED = "Вход выполнен<br><a href = '/issueTracker/issues'>Перейти к списку задач</a>";
+			//String AUTHENTICATED = "Вход выполнен<br><a href = '/issueTracker/issues'>Перейти к списку задач</a>";
+			String AUTHENTICATED = "Вход выполнен";
 			
 			userName = new UserDaoImpl().userAuthentication(login, password);
 			//ответ после аутентификации
@@ -117,7 +123,7 @@ public class Main {
 		});
 		
 		/**
-		 * изменения содрежания задачи - изменить название, изменить статус, добавить комментарий
+		 * изменения содержания задачи - изменить название, изменить статус, добавить комментарий
 		 */
 		put(ISSUE_TRACKER_EDIT_ISSUE_CHANGE, (request, response) -> {
 			
@@ -148,7 +154,6 @@ public class Main {
 			boolean addComment = (newComment.isEmpty())?false:
 					new CommentDaoImpl().addComment(id, newComment, request.cookie("userName"), newStatus, (new SimpleDateFormat("dd.MM.yy HH:mm").format(new Date())));
 			String answer = ((changeIssue||addComment)==true)?CHANGED:NOT_CHANGED;
-			
 			return answer;
 		});
 		
@@ -163,7 +168,7 @@ public class Main {
 			 * поля новой задачи
 			 */
 			String name = request.queryParams("name");// название
-			String author = request.queryParams("author");// автор
+			String author = (request.queryParams("author").isEmpty())?request.cookie("userName"):request.queryParams("author");// автор (если поле не заполнено - пользователь из cookie)
 			String description = request.queryParams("description");//описание
 			
 			boolean createIssue = new IssueDaoImpl().createIssue(name, author, description);

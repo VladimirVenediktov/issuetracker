@@ -1,10 +1,12 @@
-package com.axmor;
+package com.axmor.user;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.axmor.connection.ConnectionPool;
 
 public class UserDaoImpl implements UserDao {
 	

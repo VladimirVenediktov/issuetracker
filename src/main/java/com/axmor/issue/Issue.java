@@ -1,6 +1,8 @@
-package com.axmor;
+package com.axmor.issue;
 
 import java.util.ArrayList;
+
+import com.axmor.comment.Comment;
 
 /** 
  * Класс объекта Issue (задача).
@@ -52,7 +54,7 @@ public class Issue {
 		this.comments = comments;
 	}
 	
-	enum IssueStatus{
+	public enum IssueStatus{
 		
 		Новая,
 		Выполняется,

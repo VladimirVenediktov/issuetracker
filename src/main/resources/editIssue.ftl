@@ -50,6 +50,7 @@
 					data: dataStr,
 					success:function(answer){
 						$("div").html(answer);
+						window.location.reload();
 						}
 					}
 				);
@@ -64,6 +65,7 @@
 					url: "/issueTracker/editIssueDelete/${issue.id}",
 					success:function(answer){
 						$("div").html(answer);
+						window.location.href = "/issueTracker/issues";
 						}
 					}
 				);
